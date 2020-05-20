@@ -1,4 +1,5 @@
 require "json"
+require "rubystats"
 require "uuidtools"
 require "byebug"
 require "nokogiri"
@@ -23,11 +24,11 @@ def lp_traverse(s, lvl, code, progs)
   end
 end
 
-def get_result
+def get_result(s)
   r = rand
-  if r < 0.1 then "not displayed"
-  elsif r < 0.3 then "intermittent"
-  else "mastered"
+  if r < s[:aptitude] - 0.3 then "not displayed"
+  elsif r < s[:aptitude] then "intermittent"
+  else "fully mastered"
   end
 end
 
@@ -52,6 +53,7 @@ end
 
 def get_sif_students
   students = []
+  gen = Rubystats::NormalDistribution.new(0.5, 0.18)
   sessiontoken = "ca6618e3-f17a-42cb-90be-6543b016f489"
   usertoken = "7417b5beee404467b5ac6f9584ee6ec9"
   tk = Base64.encode64("#{sessiontoken}:#{usertoken}").strip.gsub(/\n/, "")
@@ -63,7 +65,10 @@ def get_sif_students
     surname = x.at("./xmlns:PersonInfo/xmlns:Name/xmlns:FamilyName")
     email = x.at("./xmlns:PersonInfo/xmlns:EmailList/xmlns:Email")
     yrlvl = x.at("./xmlns:MostRecent/xmlns:YearLevel/xmlns:Code")
-    students << {name: "#{given.text} #{surname&.text}", email: email&.text, yrlvl: yrlvl&.text }
+    students << { 
+      name: "#{given.text} #{surname&.text}", email: email&.text, yrlvl: yrlvl&.text,
+      aptitude: gen.rng
+    }
   end
   students
 end
@@ -80,12 +85,13 @@ end
 observations = []
 students.each do |s|
   get_indicators(s, progs, 10).each do |i|
-    r = get_result
+    r = get_result(s)
     observations << {
       id: UUIDTools::UUID.random_create,
       actor: {
         name: s[:name],
-        mbox: s[:email]
+        mbox: s[:email],
+        objectType: "Person"
       },
       verb: {
         id: "http://adlnet.gov/expapi/verbs/mastered",
@@ -95,10 +101,16 @@ students.each do |s|
       },
       object: {
         id: i[:id],
-        definition: i[:text],
-        extensions: {
-          "learning Progression": i[:code]
-        }
+        definition: {
+          name: {
+            "en-US": i[:code],
+          },
+          description: {
+            "en-US": i[:text]
+          },
+          type: "http://adlnet.gov/expapi/activities/objective"
+        },
+        objectType: "Activity"
       },
       result: {
         success: (r == "mastered" ? "true" : "false"),
