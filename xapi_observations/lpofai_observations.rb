@@ -34,8 +34,8 @@ def get_result(s, gc)
 end
 
 def get_indicators(s, progs, n, gc)
-  return get_indicators(s, progs, n/2, :literacy) + get_indicators(s, progs, n/2, :numeracy) if gc.nil? && s[:yrlvl].to_i < 11
-  return get_indicators(s, progs, n, :literacy) if gc.nil? && s[:yrlvl].to_i >= 11 # numeracy only goes up to level 10
+  return get_indicators0(s, progs, n/2, :literacy) + get_indicators(s, progs, n/2, :numeracy) if gc.nil? && s[:yrlvl].to_i < 11
+  return get_indicators0(s, progs, n, :literacy) if gc.nil? && s[:yrlvl].to_i >= 11 # numeracy only goes up to level 10
   ret = []
   while ret.size < n and ret.size < progs[gc][s[:yrlvl]].size
     newval = rand(progs[gc][s[:yrlvl]].size)
@@ -63,6 +63,7 @@ def get_sif_students
       lit_aptitude: gen.rng, num_aptitude: gen.rng
     }
   end
+  warn "Student count is: #{students.size}"
   students
 end
 
@@ -594,19 +595,35 @@ students.each do |s|
   students_per_yrlvl[s[:yrlvl]] << s
 end
 
+def NSIP_observations(progs, students_per_yrlvl, indicator_count, student_count, filename)
+  File.open(filename + ".literacy.json", "w:utf-8") do |f|
+    f.write(JSON.pretty_generate(NSIP_observations0(progs, students_per_yrlvl, indicator_count, student_count, :literacy)))
+  end
+  File.open(filename + ".numeracy.json", "w:utf-8") do |f|
+    f.write(JSON.pretty_generate(NSIP_observations0(progs, students_per_yrlvl, indicator_count, student_count, :numeracy)))
+  end
+end
 
-def NSIP_observations(progs, students_per_yrlvl)
+def NSIP_observations0(progs, students_per_yrlvl, indicator_count, studentcount = 0, gc = nil)
   observations = []
+  students = 0
   students_per_yrlvl.keys.each do |yr|
+    break if (students > studentcount.to_i / 12)
     students_per_yrlvl[yr].each do |s|
-      get_indicators(s, progs, 10, nil).each do |i|
+      break if (students > studentcount.to_i / 12)
+      students += 1
+      get_indicators(s, progs, indicator_count, gc).each do |i|
         observations << observation(i, s)
       end
     end
   end
 
+  students = 0
   students_per_yrlvl.keys.each do |yr|
-    get_indicators(students_per_yrlvl[yr][0], progs, 10, nil).each_with_index do |i, n|
+    break if (students > studentcount.to_i / 12)
+    get_indicators(students_per_yrlvl[yr][0], progs, indicator_count, gc).each_with_index do |i, n|
+      break if (students > studentcount.to_i / 12)
+      students += 1
       students_per_yrlvl[yr].each do |s|
         observations << assessment1(i, s, n, teachers[s[:yrlvl].to_sym])
       end
@@ -706,6 +723,6 @@ def ESA_observations(progs, students_per_yrlvl)
   data
 end
 
-#puts JSON.pretty_generate(NSIP_observations(progs, students_per_yrlvl))
-puts JSON.pretty_generate(ESA_observations(progs, students_per_yrlvl))
+NSIP_observations(progs, students_per_yrlvl, 10, 100, "output")
+#puts JSON.pretty_generate(ESA_observations(progs, students_per_yrlvl))
 
