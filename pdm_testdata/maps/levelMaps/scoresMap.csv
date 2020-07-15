@@ -1,0 +1,18 @@
+scoreId,vendor,assessment,token,score,mappedScore
+SC0000001,SPA,TC-TGHU6543,A,null,250
+SC0000002,SPA,TC-TGHU6543,F,null,180
+SC0000003,BrightPath,Narrative Scale,null,350,280
+SC0000004,BrightPath,Narrative Scale,null,360,180
+SC0000005,BrightPath,Narrative Scale,null,300,180
+SC0000006,BrightPath,Narrative Scale,null,320,200
+SC0000007,BrightPath,Narrative Scale,null,400,200
+SC0000008,BrightPath,Narrative Scale,null,330,200
+SC0000009,BrightPath,Narrative Scale,null,420,200
+SC0000010,BrightPath,Persuasive Scale,null,280,200
+SC0000011,BrightPath,Persuasive Scale,null,220,200
+SC0000012,BrightPath,Persuasive Scale,null,180,200
+SC0000013,BrightPath,Persuasive Scale,null,90,200
+SC0000014,BrightPath,Persuasive Scale,null,200,200
+SC0000015,BrightPath,Persuasive Scale,null,110,200
+SC0000016,BrightPath,Persuasive Scale,null,185,200
+SC0000017,BrightPath,Persuasive Scale,null,170,200
