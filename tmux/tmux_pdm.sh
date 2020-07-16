@@ -56,13 +56,17 @@ tmux new-window -d -t '=otfpdm' -n n3w -c ~/github/n3-web/server/n3w
 tmux send-keys -t '=otfpdm:=n3w' 'rm -r ./contexts' Enter # remove any previous data
 tmux send-keys -t '=otfpdm:=n3w' './n3w' Enter # start the server
 
-# start the text classifier
+# start the text classifier service
 tmux new-window -d -t '=otfpdm' -n txtclss -c ~/github/otf-classifier/cmd/otf-classifier
 tmux send-keys -t '=otfpdm:=txtclss' './otf-classifier' Enter
 
-# start the aligner
+# start the aligner service
 tmux new-window -d -t '=otfpdm' -n align -c ~/github/otf-align/cmd/otf-align
 tmux send-keys -t '=otfpdm:=align' './otf-align --port=1324' Enter
+
+# start the leveller service
+tmux new-window -d -t '=otfpdm' -n level -c ~/github/otf-level/cmd/otf-level
+tmux send-keys -t '=otfpdm:=level' './otf-level --port=1327' Enter
 
 
 # 
