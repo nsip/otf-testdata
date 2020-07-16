@@ -15,6 +15,15 @@ set -euC
 # 
 export PDM_ROOT=~/otfdata 
 # 
+# server host addresses, note these
+# are primarily used within the benthos workflows
+# 
+export LEVELLER_HOST=127.0.0.1
+export NATS_HOST=127.0.0.1
+export ALIGNER_HOST=127.0.0.1
+export N3_HOST=127.0.0.1
+
+# 
 # now create demo input/audit/nats
 # folder structure
 mkdir -p $PDM_ROOT
@@ -124,11 +133,11 @@ tmux send-keys -t '=otfpdm:=benthos_level_map_publish' './run_benthos_level_maps
 # 
 sleep 5
 cp ~/github/otf-testdata/pdm_testdata/maps/alignmentMaps/nlpLinks.csv  $PDM_ROOT/in/maps/align
-sleep 1
+sleep 5
 cp ~/github/otf-testdata/pdm_testdata/maps/alignmentMaps/providerItems.csv  $PDM_ROOT/in/maps/align
-sleep 1
+sleep 5
 cp ~/github/otf-testdata/pdm_testdata/maps/levelMaps/scaleMap.csv  $PDM_ROOT/in/maps/level
-sleep 1
+sleep 5
 cp ~/github/otf-testdata/pdm_testdata/maps/levelMaps/scoresMap.csv  $PDM_ROOT/in/maps/level
 
 # attach to the session
