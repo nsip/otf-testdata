@@ -16,10 +16,10 @@
       "id": "https://mracqa.azurewebsites.net/elements/learning-progressions/3.0/2020/06/5fc67ca3-5c77-4e8f-8463-a0d92a52e746",
       "definition": {
         "name": {
-          "en-US": "NNPrT2.3"
+          "en-US": "not known"
         },
         "description": {
-          "en-US": "<ul>\n<li><span>calculates a percentage of an amount (e.g. interprets that a 25% discount on an $80 purchase means 25% × $80 and determines $20 is a quarter of $80)</span></li>\n</ul>"
+          "en-US": "orients map"
         },
         "type": "http://adlnet.gov/expapi/activities/objective"
       },
@@ -60,10 +60,10 @@
       "id": "https://mracqa.azurewebsites.net/elements/learning-progressions/3.0/2020/06/1c72bbc1-6783-461f-b32c-70349ac1cc53",
       "definition": {
         "name": {
-          "en-US": "NNNPV2.5"
+          "en-US": "not known"
         },
         "description": {
-          "en-US": "<ul>\n<li><span>indicates the larger or smaller of two numerals in the range from 1 to 10 (e.g. when shown the numerals 6 and 3, identifies 3 as representing the smaller amount)</span></li>\n</ul>"
+          "en-US": "locates objects"
         },
         "type": "http://adlnet.gov/expapi/activities/objective"
       },
@@ -104,10 +104,10 @@
       "id": "https://mracqa.azurewebsites.net/elements/learning-progressions/3.0/2020/06/ee68f350-3373-402c-ba15-38bc6b0dda11",
       "definition": {
         "name": {
-          "en-US": "NNNPV2.4"
+          "en-US": "not known"
         },
         "description": {
-          "en-US": "<ul>\n<li><span>orders numerals to at least 10 (e.g. using number cards, places the numerals 1-10 in the correct order)</span></li>\n</ul>"
+          "en-US": "counts forward 1-10"
         },
         "type": "http://adlnet.gov/expapi/activities/objective"
       },
@@ -148,10 +148,10 @@
       "id": "https://mracqa.azurewebsites.net/elements/learning-progressions/3.0/2020/06/ff5791ee-4d40-44cc-a384-8ed797f81a3f",
       "definition": {
         "name": {
-          "en-US": "NNCPr2.3"
+          "en-US": "not known"
         },
         "description": {
-          "en-US": "<ul>\n<li><span>counts a small number of items typically less than 4 </span></li>\n</ul>"
+          "en-US": "mass capacity"
         },
         "type": "http://adlnet.gov/expapi/activities/objective"
       },
@@ -192,10 +192,10 @@
       "id": "https://mracqa.azurewebsites.net/elements/learning-progressions/3.0/2020/06/aaf7b03f-7aef-41d5-b2ce-ce1427d0d01d",
       "definition": {
         "name": {
-          "en-US": "NNInF2.1"
+          "en-US": "not known"
         },
         "description": {
-          "en-US": "<ul>\n<li><span>makes quarters and eighths by repeated halving (e.g. locates halfway then halves each half; eight counters halved and then halved again into four groups of two)</span></li>\n</ul>"
+          "en-US": "angle properties"
         },
         "type": "http://adlnet.gov/expapi/activities/objective"
       },
