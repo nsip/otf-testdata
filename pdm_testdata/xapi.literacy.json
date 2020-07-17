@@ -16,10 +16,10 @@
       "id": "https://mracqa.azurewebsites.net/elements/learning-progressions/3.0/2020/06/258368bc-5bc0-4e43-baf1-1271eac86ec0",
       "definition": {
         "name": {
-          "en-US": "LSInT2.3"
+          "en-US": "not known"
         },
         "description": {
-          "en-US": "<ul>\n<li><span>shows beginning awareness of discussion conventions (e.g. pauses when another speaker starts)</span></li>\n</ul>"
+          "en-US": "turns head in the direction of the speaker"
         },
         "type": "http://adlnet.gov/expapi/activities/objective"
       },
@@ -60,10 +60,10 @@
       "id": "https://mracqa.azurewebsites.net/elements/learning-progressions/3.0/2020/06/0f36422b-de71-40e7-983c-105b76b197b3",
       "definition": {
         "name": {
-          "en-US": "LSSpK2.4"
+          "en-US": "not known"
         },
         "description": {
-          "en-US": "<ul>\n<li><span>uses mainly appropriate word order</span></li>\n</ul>"
+          "en-US": "emergent text"
         },
         "type": "http://adlnet.gov/expapi/activities/objective"
       },
@@ -104,10 +104,10 @@
       "id": "https://mracqa.azurewebsites.net/elements/learning-progressions/3.0/2020/06/32ebca7c-99eb-4baf-9acc-32aa0d4faf31",
       "definition": {
         "name": {
-          "en-US": "LWCrT2.7"
+          "en-US": "not known"
         },
         "description": {
-          "en-US": "<ul>\n<li><span>writes some recognisable letters (e.g. one or two letters of own name)</span></li>\n</ul>"
+          "en-US": "recognisable letters"
         },
         "type": "http://adlnet.gov/expapi/activities/objective"
       },
@@ -148,10 +148,10 @@
       "id": "https://mracqa.azurewebsites.net/elements/learning-progressions/3.0/2020/06/57cff06a-ed73-42ec-bbab-d801f9c45ccd",
       "definition": {
         "name": {
-          "en-US": "LWCrT2.8"
+          "en-US": "not known"
         },
         "description": {
-          "en-US": "<ul>\n<li><span>identifies symbols/letters and words written or drawn with prompting (see <em>Phonic knowledge and word recognition</em>)</span></li>\n</ul>"
+          "en-US": "identifies words with prompting"
         },
         "type": "http://adlnet.gov/expapi/activities/objective"
       },
@@ -192,10 +192,10 @@
       "id": "https://mracqa.azurewebsites.net/elements/learning-progressions/3.0/2020/06/447a0c45-1dc0-4c77-9dc0-fdf610e72ce8",
       "definition": {
         "name": {
-          "en-US": "LRUnT2.8"
+          "en-US": "not known"
         },
         "description": {
-          "en-US": "<ul>\n<li>names familiar objects in texts and adds some detail (e.g. the apple is red)</li>\n</ul>"
+          "en-US": "names familiar objects and adds detail"
         },
         "type": "http://adlnet.gov/expapi/activities/objective"
       },
