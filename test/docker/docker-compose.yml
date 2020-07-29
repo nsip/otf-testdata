@@ -1,0 +1,26 @@
+version: '3.7'
+
+networks:
+  default:
+    external:
+      name: thehub_default
+
+services:
+
+  otf-reader:
+    image: nsip/oft-reader:dev
+    build: https://7f4da21a1d2a8fcea4c7376f2f85a6152dfc8531@github.com/nsip/otf-reader.git#docker
+    environment:
+        - OTF_READER_SRVC_PORT=3000
+        - OTF_READER_SRVC_NIASHOST=n3-web
+        - OTF_READER_SRVC_NIASPORT=3000
+        - OTF_READER_SRVC_NIASTOKEN=xxx
+        - OTF_READER_SRVC_TCHOST=xxx
+        - OTF_READER_SRVC_TCPORT=xxx
+    ports:
+      - 6004:3000
+
+
+So how to get the data in place
+
+    * 

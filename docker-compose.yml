@@ -1,0 +1,93 @@
+version: '3.7'
+
+networks:
+  default:
+    external:
+      name: thehub_default
+
+services:
+
+  otf-align:
+    image: nsip/oft-align:dev
+    build: https://7f4da21a1d2a8fcea4c7376f2f85a6152dfc8531@github.com/nsip/otf-align.git#docker
+    environment:
+        - OTF_ALIGN_SRVC_PORT=3000
+        - OTF_ALIGN_SRVC_NIASHOST=n3-web
+        - OTF_ALIGN_SRVC_NIASPORT=3000
+        - OTF_ALIGN_SRVC_NIASTOKEN=xxx
+        - OTF_ALIGN_SRVC_TCHOST=xxx
+        - OTF_ALIGN_SRVC_TCPORT=xxx
+    ports:
+      - 6001:3000
+
+  otf-classifier:
+    image: nsip/oft-classifier:dev
+    build: https://7f4da21a1d2a8fcea4c7376f2f85a6152dfc8531@github.com/nsip/otf-classifier.git#docker
+    environment:
+        - OTF_CLASSIFIER_SRVC_PORT=3000
+        - OTF_CLASSIFIER_SRVC_NIASHOST=n3-web
+        - OTF_CLASSIFIER_SRVC_NIASPORT=3000
+        - OTF_CLASSIFIER_SRVC_NIASTOKEN=xxx
+        - OTF_CLASSIFIER_SRVC_TCHOST=xxx
+        - OTF_CLASSIFIER_SRVC_TCPORT=xxx
+    ports:
+      - 6002:3000
+
+  otf-level:
+    image: nsip/oft-level:dev
+    build: https://7f4da21a1d2a8fcea4c7376f2f85a6152dfc8531@github.com/nsip/otf-level.git#docker
+    environment:
+        - OTF_LEVEL_SRVC_PORT=3000
+        - OTF_LEVEL_SRVC_NIASHOST=n3-web
+        - OTF_LEVEL_SRVC_NIASPORT=3000
+        - OTF_LEVEL_SRVC_NIASTOKEN=xxx
+        - OTF_LEVEL_SRVC_TCHOST=xxx
+        - OTF_LEVEL_SRVC_TCPORT=xxx
+    ports:
+      - 6003:3000
+
+      # XXX reader needs to have multiple:
+      #     brightpath Data
+      #     for lpofa (xapi) literacy data
+      #     for lpofa (xapi) numeracy data
+      #     for maths pathway data
+      #     for sreams (SPA) mapped data
+      #     for sreams (SPA) prescribed data
+      #     for alignment service data maps
+      #     for the levelling service data maps
+      # ./otf-reader --folder=$PDM_ROOT/in/brightpath --config=./config/bp_config.json
+      # Methods:
+      # - Docker image 
+
+  otf-reader:
+    image: nsip/oft-reader:dev
+    build: https://7f4da21a1d2a8fcea4c7376f2f85a6152dfc8531@github.com/nsip/otf-reader.git#docker
+    environment:
+        - OTF_READER_SRVC_PORT=3000
+        - OTF_READER_SRVC_NIASHOST=n3-web
+        - OTF_READER_SRVC_NIASPORT=3000
+        - OTF_READER_SRVC_NIASTOKEN=xxx
+        - OTF_READER_SRVC_TCHOST=xxx
+        - OTF_READER_SRVC_TCPORT=xxx
+    ports:
+      - 6004:3000
+
+  n3-web:
+    image: nsip/n3-web:dev
+    build: https://7f4da21a1d2a8fcea4c7376f2f85a6152dfc8531@github.com/nsip/n3-web.git#docker
+
+  natsstreaming:
+    image: nats-streaming
+    ports:
+      - 6423:4223
+      - 6823:8223
+      - 6422:4222
+      - 6822:8222
+
+  benthos:
+    image: jeffail/benthos
+    volumes:
+      - ./benthos/benthos.yaml:/benthos.yaml
+      - ./benthos/sample_data.txt:/sample_data.txt
+    ports:
+      - 6195:4195
