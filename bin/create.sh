@@ -1,13 +1,5 @@
 #!/bin/bash
-
 set -euC
-
-# Where do ou check out your NSIP code
-export GITHUB_HOME=${GITHUB_HOME:="~/github"}
-if [ ! -d "$GITHUB_HOME/otf-testdata" ]; then
-    echo "Can't find otf-testdata in $GITHUB_HOME"
-    exit 1
-fi
 
 # EXPERIMENTAL !
 # Working area - currently only shared with reader
