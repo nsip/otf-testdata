@@ -1,13 +1,20 @@
 version: '3.7'
 
-services:
-
 x-common-variables: &common-variables
   NATSHOST: natsstreaming
   PORT: 3000
   JAEGER_AGENT_HOST: ${JAEGER_AGENT_HOST:-jaeger}
 
 services:
+
+#
+#  www:
+#    build: ./site
+#    volumes:
+#      - /etc/letsencrypt:/etc/letsencrypt
+#    ports:
+#      - "${TOPPORT:-40}80:80"
+#      - "${TOPPORT:-40}43:443"
 
   otf-align:
     image: nsip/otf-align
@@ -38,6 +45,7 @@ services:
     #image: nsip/n3-web
     ##build: https://7f4da21a1d2a8fcea4c7376f2f85a6152dfc8531@github.com/nsip/n3-web.git#docker
 
+
     #environment: *common-variables
     #environment:
     #  <<: *common-variables
@@ -47,7 +55,7 @@ services:
     environment: *common-variables
     volumes:
       - ./data/otfdata/in/spa:/data
-      - ./reader/config/lpofa_literacy_config.json:/config.json
+      - ../reader/config/lpofa_literacy_config.json:/config.json
     depends_on:
       - natsstreaming
 
@@ -56,7 +64,7 @@ services:
     environment: *common-variables
     volumes:
       - ./data/otfdata/in/spa:/data
-      - ./reader/config/lpofa_literacy_config.json:/config.json
+      - ../reader/config/lpofa_literacy_config.json:/config.json
     depends_on:
       - natsstreaming
 
@@ -66,7 +74,7 @@ services:
       <<: *common-variables
     volumes:
       - ./data/otfdata/in/lpofa:/data
-      - ./reader/config/lpofa_numeracy_config.json:/config.json
+      - ../reader/config/lpofa_numeracy_config.json:/config.json
     depends_on:
        - natsstreaming
 
@@ -76,7 +84,7 @@ services:
       <<: *common-variables
     volumes:
       - ./data/otfdata/in/maths-pathway:/data
-      - ./reader/config/mp_config.json:/config.json
+      - ../reader/config/mp_config.json:/config.json
     depends_on:
        - natsstreaming
 
@@ -86,7 +94,7 @@ services:
       <<: *common-variables
     volumes:
       - ./data/otfdata/in/spa:/data
-      - ./reader/config/spa_prescribed_config.json:/config.json
+      - ../reader/config/spa_prescribed_config.json:/config.json
     depends_on:
        - natsstreaming
 
@@ -96,7 +104,7 @@ services:
       <<: *common-variables
     volumes:
       - ./data/otfdata/in/align:/data
-      - ./reader/config/alignMaps_config.json:/config.json
+      - ../reader/config/alignMaps_config.json:/config.json
     depends_on:
        - natsstreaming
 
@@ -106,7 +114,7 @@ services:
       <<: *common-variables
     volumes:
       - ./data/otfdata/in/level:/data
-      - ./reader/config/levelMaps.json:/config.json
+      - ../reader/config/levelMaps_config.json:/config.json
     depends_on:
        - natsstreaming
 
@@ -116,7 +124,7 @@ services:
       <<: *common-variables
     volumes:
       - ./data/otfdata/in/brightpath:/data
-      - ./reader/config/bp_config.json:/config.json
+      - ../reader/config/bp_config.json:/config.json
     depends_on:
        - natsstreaming
 
@@ -126,7 +134,7 @@ services:
       <<: *common-variables
     volumes:
       - ./data/otfdata/in/spa:/data
-      - ./reader/config/spa_mapped_config.json:/config.json
+      - ../reader/config/spa_mapped_config.json:/config.json
     depends_on:
        - natsstreaming
 
