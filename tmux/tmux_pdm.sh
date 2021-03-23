@@ -14,6 +14,7 @@ set -euC
 # nats server here
 # 
 export PDM_ROOT=~/otfdata 
+export OTF_ROOT=~/Documents/Arbeit/otf-code
 # 
 # server host addresses, note these
 # are primarily used within the benthos workflows
@@ -52,20 +53,20 @@ tmux send-keys -t '=otfpdm:=nats' 'nats-streaming-server' Enter
 sleep 2
 
 # start an n3 server
-tmux new-window -d -t '=otfpdm' -n n3w -c ~/github/n3-web/server/n3w
+tmux new-window -d -t '=otfpdm' -n n3w -c $OTF_ROOT/n3-web/server/n3w
 tmux send-keys -t '=otfpdm:=n3w' 'rm -r ./contexts' Enter # remove any previous data
 tmux send-keys -t '=otfpdm:=n3w' './n3w' Enter # start the server
 
 # start the text classifier service
-tmux new-window -d -t '=otfpdm' -n txtclss -c ~/github/otf-classifier/cmd/otf-classifier
+tmux new-window -d -t '=otfpdm' -n txtclss -c $OTF_ROOT/otf-classifier/cmd/otf-classifier
 tmux send-keys -t '=otfpdm:=txtclss' './otf-classifier' Enter
 
 # start the aligner service
-tmux new-window -d -t '=otfpdm' -n align -c ~/github/otf-align/cmd/otf-align
+tmux new-window -d -t '=otfpdm' -n align -c $OTF_ROOT/otf-align/cmd/otf-align
 tmux send-keys -t '=otfpdm:=align' './otf-align --port=1324' Enter
 
 # start the leveller service
-tmux new-window -d -t '=otfpdm' -n level -c ~/github/otf-level/cmd/otf-level
+tmux new-window -d -t '=otfpdm' -n level -c $OTF_ROOT/otf-level/cmd/otf-level
 tmux send-keys -t '=otfpdm:=level' './otf-level --port=1327' Enter
 
 
@@ -74,35 +75,35 @@ tmux send-keys -t '=otfpdm:=level' './otf-level --port=1327' Enter
 # 
 # 
 # for brightpath data
-tmux new-window -d -t '=otfpdm' -n rdr_bp -c ~/github/otf-reader/cmd/otf-reader
+tmux new-window -d -t '=otfpdm' -n rdr_bp -c $OTF_ROOT/otf-reader/cmd/otf-reader
 tmux send-keys -t '=otfpdm:=rdr_bp' './otf-reader --folder=$PDM_ROOT/in/brightpath --config=./config/bp_config.json' Enter
 # 
 # for lpofa (xapi) literacy data
-tmux new-window -d -t '=otfpdm' -n rdr_lpofa_lit -c ~/github/otf-reader/cmd/otf-reader
+tmux new-window -d -t '=otfpdm' -n rdr_lpofa_lit -c $OTF_ROOT/otf-reader/cmd/otf-reader
 tmux send-keys -t '=otfpdm:=rdr_lpofa_lit' './otf-reader --folder=$PDM_ROOT/in/lpofa --config=./config/lpofa_literacy_config.json' Enter
 # 
 # for lpofa (xapi) numeracy data
-tmux new-window -d -t '=otfpdm' -n rdr_lpofa_num -c ~/github/otf-reader/cmd/otf-reader
+tmux new-window -d -t '=otfpdm' -n rdr_lpofa_num -c $OTF_ROOT/otf-reader/cmd/otf-reader
 tmux send-keys -t '=otfpdm:=rdr_lpofa_num' './otf-reader --folder=$PDM_ROOT/in/lpofa --config=./config/lpofa_numeracy_config.json' Enter
 # 
 # for maths pathway data
-tmux new-window -d -t '=otfpdm' -n rdr_mp -c ~/github/otf-reader/cmd/otf-reader
+tmux new-window -d -t '=otfpdm' -n rdr_mp -c $OTF_ROOT/otf-reader/cmd/otf-reader
 tmux send-keys -t '=otfpdm:=rdr_mp' './otf-reader --folder=$PDM_ROOT/in/maths-pathway --config=./config/mp_config.json' Enter
 # 
 # for sreams (SPA) mapped data
-tmux new-window -d -t '=otfpdm' -n rdr_spa_mapped -c ~/github/otf-reader/cmd/otf-reader
+tmux new-window -d -t '=otfpdm' -n rdr_spa_mapped -c $OTF_ROOT/otf-reader/cmd/otf-reader
 tmux send-keys -t '=otfpdm:=rdr_spa_mapped' './otf-reader --folder=$PDM_ROOT/in/spa --config=./config/spa_mapped_config.json' Enter
 # 
 # for sreams (SPA) prescribed data
-tmux new-window -d -t '=otfpdm' -n rdr_spa_prescribed -c ~/github/otf-reader/cmd/otf-reader
+tmux new-window -d -t '=otfpdm' -n rdr_spa_prescribed -c $OTF_ROOT/otf-reader/cmd/otf-reader
 tmux send-keys -t '=otfpdm:=rdr_spa_prescribed' './otf-reader --folder=$PDM_ROOT/in/spa --config=./config/spa_prescribed_config.json' Enter
 # 
 # for alignment service data maps
-tmux new-window -d -t '=otfpdm' -n rdr_alignment_maps -c ~/github/otf-reader/cmd/otf-reader
+tmux new-window -d -t '=otfpdm' -n rdr_alignment_maps -c $OTF_ROOT/otf-reader/cmd/otf-reader
 tmux send-keys -t '=otfpdm:=rdr_alignment_maps' './otf-reader --folder=$PDM_ROOT/in/maps/align --config=./config/alignMaps_config.json' Enter
 # 
 # for the levelling service data maps
-tmux new-window -d -t '=otfpdm' -n rdr_level_maps -c ~/github/otf-reader/cmd/otf-reader
+tmux new-window -d -t '=otfpdm' -n rdr_level_maps -c $OTF_ROOT/otf-reader/cmd/otf-reader
 tmux send-keys -t '=otfpdm:=rdr_level_maps' './otf-reader --folder=$PDM_ROOT/in/maps/level --config=./config/levelMaps_config.json' Enter
 
 
@@ -112,19 +113,19 @@ tmux send-keys -t '=otfpdm:=rdr_level_maps' './otf-reader --folder=$PDM_ROOT/in/
 # 
 # 
 # start the alignment data processing workflow
-tmux new-window -d -t '=otfpdm' -n benthos_align -c ~/github/otf-align/cmd/benthos
+tmux new-window -d -t '=otfpdm' -n benthos_align -c $OTF_ROOT/otf-align/cmd/benthos
 tmux send-keys -t '=otfpdm:=benthos_align' './run_benthos_align_data.sh' Enter
 # 
 # start the levelling data processing workflow
-tmux new-window -d -t '=otfpdm' -n benthos_level -c ~/github/otf-level/cmd/benthos
+tmux new-window -d -t '=otfpdm' -n benthos_level -c $OTF_ROOT/otf-level/cmd/benthos
 tmux send-keys -t '=otfpdm:=benthos_level' './run_benthos_level_data.sh' Enter
 # 
 # start the benthos alignment map publishing workflow
-tmux new-window -d -t '=otfpdm' -n benthos_align_map_publish -c ~/github/otf-align/cmd/benthos
+tmux new-window -d -t '=otfpdm' -n benthos_align_map_publish -c $OTF_ROOT/otf-align/cmd/benthos
 tmux send-keys -t '=otfpdm:=benthos_align_map_publish' './run_benthos_align_maps.sh' Enter
 #
 # start the benthos level map publishing workflow
-tmux new-window -d -t '=otfpdm' -n benthos_level_map_publish -c ~/github/otf-level/cmd/benthos
+tmux new-window -d -t '=otfpdm' -n benthos_level_map_publish -c $OTF_ROOT/otf-level/cmd/benthos
 tmux send-keys -t '=otfpdm:=benthos_level_map_publish' './run_benthos_level_maps.sh' Enter
 
 # 
@@ -136,13 +137,13 @@ tmux send-keys -t '=otfpdm:=benthos_level_map_publish' './run_benthos_level_maps
 # eg. n3 may not fully be up by the time we get here
 # 
 sleep 5
-cp ~/github/otf-testdata/pdm_testdata/maps/alignmentMaps/nlpLinks.csv  $PDM_ROOT/in/maps/align
+cp $OTF_ROOT/otf-testdata/pdm_testdata/maps/alignmentMaps/nlpLinks.csv  $PDM_ROOT/in/maps/align
 sleep 5
-cp ~/github/otf-testdata/pdm_testdata/maps/alignmentMaps/providerItems.csv  $PDM_ROOT/in/maps/align
+cp $OTF_ROOT/otf-testdata/pdm_testdata/maps/alignmentMaps/providerItems.csv  $PDM_ROOT/in/maps/align
 sleep 5
-cp ~/github/otf-testdata/pdm_testdata/maps/levelMaps/scaleMap.csv  $PDM_ROOT/in/maps/level
+cp $OTF_ROOT/otf-testdata/pdm_testdata/maps/levelMaps/scaleMap.csv  $PDM_ROOT/in/maps/level
 sleep 5
-cp ~/github/otf-testdata/pdm_testdata/maps/levelMaps/scoresMap.csv  $PDM_ROOT/in/maps/level
+cp $OTF_ROOT/otf-testdata/pdm_testdata/maps/levelMaps/scoresMap.csv  $PDM_ROOT/in/maps/level
 
 # attach to the session
 att
